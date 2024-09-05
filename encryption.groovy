@@ -1,4 +1,4 @@
-// Version: 0.0.1
+// Version: 0.0.2
 
 /*
 Обязательный property: encrypted_pass
@@ -161,6 +161,10 @@ try {
 
             // get sensitive parameter
             def password = context.getProperty('encrypted_pass').evaluateAttributeExpressions().getValue()
+            if (!password) {
+                log.error('encrypted_pass is null')
+                return
+            }
 
             content_list.each { map ->
 
